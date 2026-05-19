@@ -22,7 +22,7 @@
         "reflectY": true
       },
       "data": {
-        "url": "malaysia-states.topojson",
+        "url": "data/malaysia-states.topojson",
         "format": {
           "type": "topojson",
           "feature": "states"
@@ -33,7 +33,7 @@
           "lookup": "id",
           "from": {
             "data": {
-              "url": "state_arrivals.csv"
+              "url": "data/state_arrivals.csv"
             },
             "key": "State",
             "fields": ["Arrivals_Millions"]
