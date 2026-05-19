@@ -9,7 +9,7 @@
     "subtitleColor": "#586069"
   },
   "data": {
-    "url": "national_pulse.csv"
+    "url": "data/national_pulse.csv"
   },
   "config": {
     "background": "#ffffff",
