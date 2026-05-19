@@ -1,0 +1,128 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Interstate Origin-Destination Travel Corridor Matrix",
+    "subtitle": "Heatmap grid mapping visitor volume vectors (Thousands) from State of Origin to State Visited, 2024",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069",
+    "offset": 20
+  },
+  "width": 780,
+  "height": 400,
+  "padding": {"left": 40, "right": 40, "top": 10, "bottom": 20},
+  "data": {
+    "values": [
+      {"Origin": "Kuala Lumpur", "Destination": "Kuala Lumpur", "Volume_Thousands": 119},
+      {"Origin": "Kuala Lumpur", "Destination": "Selangor",     "Volume_Thousands": 467},
+      {"Origin": "Kuala Lumpur", "Destination": "Johor",        "Volume_Thousands": 383},
+      {"Origin": "Kuala Lumpur", "Destination": "Penang",       "Volume_Thousands": 523},
+      {"Origin": "Kuala Lumpur", "Destination": "Perak",        "Volume_Thousands": 901},
+      {"Origin": "Kuala Lumpur", "Destination": "Pahang",       "Volume_Thousands": 1981},
+      {"Origin": "Kuala Lumpur", "Destination": "Melaka",       "Volume_Thousands": 221},
+      {"Origin": "Kuala Lumpur", "Destination": "Negeri Sembilan", "Volume_Thousands": 134},
+      {"Origin": "Kuala Lumpur", "Destination": "Kedah",        "Volume_Thousands": 119},
+
+      {"Origin": "Selangor",     "Destination": "Kuala Lumpur", "Volume_Thousands": 539},
+      {"Origin": "Selangor",     "Destination": "Selangor",     "Volume_Thousands": 4612},
+      {"Origin": "Selangor",     "Destination": "Johor",        "Volume_Thousands": 686},
+      {"Origin": "Selangor",     "Destination": "Penang",       "Volume_Thousands": 395},
+      {"Origin": "Selangor",     "Destination": "Perak",        "Volume_Thousands": 1053},
+      {"Origin": "Selangor",     "Destination": "Pahang",       "Volume_Thousands": 489},
+      {"Origin": "Selangor",     "Destination": "Melaka",       "Volume_Thousands": 354},
+      {"Origin": "Selangor",     "Destination": "Negeri Sembilan", "Volume_Thousands": 489},
+      {"Origin": "Selangor",     "Destination": "Kedah",        "Volume_Thousands": 216},
+
+      {"Origin": "Johor",        "Destination": "Kuala Lumpur", "Volume_Thousands": 1100},
+      {"Origin": "Johor",        "Destination": "Selangor",     "Volume_Thousands": 9574},
+      {"Origin": "Johor",        "Destination": "Johor",        "Volume_Thousands": 3704},
+      {"Origin": "Johor",        "Destination": "Penang",       "Volume_Thousands": 4766},
+      {"Origin": "Johor",        "Destination": "Perak",        "Volume_Thousands": 10208},
+      {"Origin": "Johor",        "Destination": "Pahang",       "Volume_Thousands": 9525},
+      {"Origin": "Johor",        "Destination": "Melaka",       "Volume_Thousands": 1528},
+      {"Origin": "Johor",        "Destination": "Negeri Sembilan", "Volume_Thousands": 616},
+      {"Origin": "Johor",        "Destination": "Kedah",        "Volume_Thousands": 196},
+
+      {"Origin": "Penang",       "Destination": "Kuala Lumpur", "Volume_Thousands": 45},
+      {"Origin": "Penang",       "Destination": "Selangor",     "Volume_Thousands": 539},
+      {"Origin": "Penang",       "Destination": "Johor",        "Volume_Thousands": 45},
+      {"Origin": "Penang",       "Destination": "Penang",       "Volume_Thousands": 962},
+      {"Origin": "Penang",       "Destination": "Perak",        "Volume_Thousands": 354},
+      {"Origin": "Penang",       "Destination": "Pahang",       "Volume_Thousands": 67},
+      {"Origin": "Penang",       "Destination": "Melaka",       "Volume_Thousands": 181},
+      {"Origin": "Penang",       "Destination": "Negeri Sembilan", "Volume_Thousands": 1},
+      {"Origin": "Penang",       "Destination": "Kedah",        "Volume_Thousands": 4},
+
+      {"Origin": "Perak",        "Destination": "Kuala Lumpur", "Volume_Thousands": 7},
+      {"Origin": "Perak",        "Destination": "Selangor",     "Volume_Thousands": 90},
+      {"Origin": "Perak",        "Destination": "Johor",        "Volume_Thousands": 17},
+      {"Origin": "Perak",        "Destination": "Penang",       "Volume_Thousands": 659},
+      {"Origin": "Perak",        "Destination": "Perak",        "Volume_Thousands": 6827},
+      {"Origin": "Perak",        "Destination": "Pahang",       "Volume_Thousands": 186},
+      {"Origin": "Perak",        "Destination": "Melaka",       "Volume_Thousands": 77},
+      {"Origin": "Perak",        "Destination": "Negeri Sembilan", "Volume_Thousands": 37},
+      {"Origin": "Perak",        "Destination": "Kedah",        "Volume_Thousands": 245}
+    ]
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "y": {
+      "field": "Origin",
+      "type": "nominal",
+      "title": "State of Origin (Home Location)",
+      "sort": ["Kuala Lumpur", "Selangor", "Johor", "Penang", "Perak"],
+      "axis": {
+        "labelFontSize": 11,
+        "titleFontSize": 11,
+        "titlePadding": 15,
+        "domain": true,
+        "ticks": false
+      }
+    },
+    "x": {
+      "field": "Destination",
+      "type": "nominal",
+      "title": "Destination State Visited",
+      "sort": ["Kuala Lumpur", "Selangor", "Johor", "Penang", "Perak", "Pahang", "Melaka", "Negeri Sembilan", "Kedah"],
+      "axis": {
+        "labelFontSize": 11,
+        "titleFontSize": 11,
+        "labelAngle": -30,
+        "titlePadding": 15,
+        "domain": true,
+        "ticks": false
+      }
+    },
+    "color": {
+      "field": "Volume_Thousands",
+      "type": "quantitative",
+      "title": "Travelers ('000)",
+      "scale": {
+        "type": "threshold",
+        "domain": [100, 500, 2000, 5000],
+        "scheme": "greens"
+      },
+      "legend": {
+        "orient": "right",
+        "titleFontSize": 10,
+        "labelFontSize": 9,
+        "gradientLength": 200
+      }
+    },
+    "tooltip": [
+      {"field": "Origin",           "type": "nominal",      "title": "Home Origin"},
+      {"field": "Destination",      "type": "nominal",      "title": "Visited Destination"},
+      {"field": "Volume_Thousands", "type": "quantitative", "title": "Volume (Thousands)", "format": ",d"}
+    ]
+  }
+}

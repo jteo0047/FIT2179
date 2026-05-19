@@ -1,0 +1,145 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The Pulse of Malaysian Domestic Tourism",
+    "subtitle": "Tracking annual macro visitor volumes and gross expenditure channels (2017 - 2024)",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069"
+  },
+  "data": {
+    "url": "national_pulse.csv"
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "vconcat": [
+    {
+      "title": {
+        "text": "Annual Domestic Visitor Volumes",
+        "anchor": "start",
+        "fontSize": 12,
+        "color": "#2b5c8f"
+      },
+      "width": 340,
+      "height": 115,
+      "transform": [{"filter": "datum.Metric == 'Visitors (Millions)'"}],
+      "layer": [
+        {
+          "mark": {"type": "line", "point": {"color": "#2b5c8f"}, "color": "#2b5c8f", "strokeWidth": 2.5},
+          "encoding": {
+            "x": {
+              "field": "Year", 
+              "type": "ordinal", 
+              "axis": {"labels": false, "ticks": false, "title": null}
+            },
+            "y": {
+              "field": "Value",
+              "type": "quantitative",
+              "title": "Visitors (Millions)",
+              "scale": {"zero": true, "domain": [0, 110]}
+            },
+            "tooltip": [
+              {"field": "Year", "type": "nominal"},
+              {"field": "Value", "type": "quantitative", "title": "Visitors (M)", "format": ",.2f"}
+            ]
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2019", "Text": "Pre-pandemic Peak"}]},
+          "mark": {"type": "text", "color": "#2b5c8f", "fontSize": 9, "dx": -45, "dy": -10},
+          "encoding": {
+            "x": {"field": "Year", "type": "ordinal"},
+            "text": {"field": "Text", "type": "nominal"}
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2021", "Text": "Lockdown Floor"}]},
+          "mark": {"type": "text", "color": "#2b5c8f", "fontSize": 9, "dx": 0, "dy": 15, "align": "center"},
+          "encoding": {
+            "x": {"field": "Year", "type": "ordinal"},
+            "text": {"field": "Text", "type": "nominal"}
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2024", "Text": "Post-MCO Recovery Spike"}]},
+          "mark": {"type": "text", "color": "#2b5c8f", "fontSize": 9, "dx": -55, "dy": -10},
+          "encoding": {
+            "x": {"field": "Year", "type": "ordinal"},
+            "text": {"field": "Text", "type": "nominal"}
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2020"}]},
+          "mark": {"type": "rule", "color": "#95a5a6", "strokeDash": [4, 4], "strokeWidth": 1.2},
+          "encoding": {"x": {"field": "Year", "type": "ordinal"}}
+        },
+        {
+          "data": {"values": [{"Year": "2020", "Text": "MCO Enacted"}]},
+          "mark": {"type": "text", "color": "#7f8c8d", "fontSize": 9, "fontWeight": "bold", "dy": -50, "dx": 33},
+          "encoding": {
+            "x": {"field": "Year", "type": "ordinal"},
+            "text": {"field": "Text", "type": "nominal"}
+          }
+        }
+      ]
+    },
+    {
+      "title": {
+        "text": "Annual Domestic Tourism Gross Expenditure",
+        "anchor": "start",
+        "fontSize": 12,
+        "color": "#d97d24"
+      },
+      "width": 340,
+      "height": 115,
+      "transform": [{"filter": "datum.Metric == 'Expenditure (RM Millions)'"}],
+      "layer": [
+        {
+          "mark": {"type": "line", "point": {"color": "#d97d24"}, "color": "#d97d24", "strokeWidth": 2.5},
+          "encoding": {
+            "x": {
+              "field": "Year", 
+              "type": "ordinal", 
+              "title": "Year Timeline"
+            },
+            "y": {
+              "field": "Value",
+              "type": "quantitative",
+              "title": "Expenditure (RM Millions)",
+              "scale": {"zero": true, "domain": [0, 120000]}
+            },
+            "tooltip": [
+              {"field": "Year", "type": "nominal"},
+              {"field": "Value", "type": "quantitative", "title": "Spend (RM M)", "format": ",.2f"}
+            ]
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2024", "Text": "Revenue Rebound Spike"}]},
+          "mark": {"type": "text", "color": "#d97d24", "fontSize": 9, "dx": -55, "dy": -10},
+          "encoding": {
+            "x": {"field": "Year", "type": "ordinal"},
+            "text": {"field": "Text", "type": "nominal"}
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2021", "Text": "Economic Low"}]},
+          "mark": {"type": "text", "color": "#d97d24", "fontSize": 9, "dx": 0, "dy": 15, "align": "center"},
+          "encoding": {
+            "x": {"field": "Year", "type": "ordinal"},
+            "text": {"field": "Text", "type": "nominal"}
+          }
+        },
+        {
+          "data": {"values": [{"Year": "2020"}]},
+          "mark": {"type": "rule", "color": "#95a5a6", "strokeDash": [4, 4], "strokeWidth": 1.2},
+          "encoding": {"x": {"field": "Year", "type": "ordinal"}}
+        }
+      ]
+    }
+  ]
+}

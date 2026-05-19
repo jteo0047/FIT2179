@@ -1,0 +1,159 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "hconcat": [
+    {
+      "title": {
+        "text": "Spatial Distribution of State Arrivals",
+        "subtitle": "Click a state polygon to dynamically highlight its rank on the leaderboard",
+        "anchor": "start",
+        "fontSize": 14,
+        "subtitleFontSize": 11,
+        "subtitleColor": "#586069"
+      },
+      "width": 500,
+      "height": 360,
+      "projection": {
+        "type": "identity",
+        "reflectY": true
+      },
+      "data": {
+        "url": "malaysia-states.topojson",
+        "format": {
+          "type": "topojson",
+          "feature": "states"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "id",
+          "from": {
+            "data": {
+              "url": "state_arrivals.csv"
+            },
+            "key": "State",
+            "fields": ["Arrivals_Millions"]
+          }
+        }
+      ],
+      "params": [
+        {
+          "name": "state_selection",
+          "select": {
+            "type": "point",
+            "fields": ["id"]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#ffffff",
+        "strokeWidth": 1.2
+      },
+      "encoding": {
+        "color": {
+          "field": "Arrivals_Millions",
+          "type": "quantitative",
+          "title": "Arrivals (Millions)",
+          "scale": {
+            "type": "threshold",
+            "domain": [2, 4, 6, 8, 14, 20],
+            "range": ["#e0f2f1", "#b2dfdb", "#80cbc4", "#4db6ac", "#00897b", "#00695c", "#004d40"]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "values": [2, 4, 6, 8, 14, 20]
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "state_selection",
+            "value": 1
+          },
+          "value": 0.35
+        },
+        "tooltip": [
+          {
+            "field": "id",
+            "type": "nominal",
+            "title": "State/Territory"
+          },
+          {
+            "field": "Arrivals_Millions",
+            "type": "quantitative",
+            "title": "Arrivals (Millions)",
+            "format": ",.2f"
+          }
+        ]
+      }
+    },
+    {
+      "title": {
+        "text": "State Arrival Leaderboard Rankings",
+        "subtitle": "Deep teal highlights macro hubs; selected states remain highlighted on click",
+        "anchor": "start",
+        "fontSize": 14,
+        "subtitleFontSize": 11,
+        "subtitleColor": "#586069"
+      },
+      "width": 320,
+      "height": 360,
+      "data": {
+        "url": "state_arrivals.csv"
+      },
+      "transform": [
+        {
+          "calculate": "datum.State",
+          "as": "id"
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4
+      },
+      "encoding": {
+        "x": {
+          "field": "Arrivals_Millions",
+          "type": "quantitative",
+          "title": "Tourist Arrivals (Millions)",
+          "scale": {"zero": true}
+        },
+        "y": {
+          "field": "State",
+          "type": "nominal",
+          "title": null,
+          "sort": "-x",
+          "axis": {"labelFontSize": 11, "ticks": false, "domain": false}
+        },
+        "color": {
+          "condition": [
+            {
+              "test": "datum.Arrivals_Millions >= 14.0",
+              "value": "#0f4c46"
+            }
+          ],
+          "value": "#4db6ac"
+        },
+        "opacity": {
+          "condition": {
+            "param": "state_selection",
+            "empty": true,
+            "value": 1
+          },
+          "value": 0.25
+        },
+        "tooltip": [
+          {"field": "State", "type": "nominal", "title": "State/Territory"},
+          {"field": "Arrivals_Millions", "type": "quantitative", "title": "Arrivals (Millions)", "format": ",.2f"}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Structural Behavioral Pivot (2019 vs. 2024)",
+    "subtitle": "Tracking generational shifts in regional Malaysian state ranking vectors",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069"
+  },
+  "width": 380,
+  "height": 330,
+  "data": {
+    "values": [
+      {"State": "Kuala Lumpur",    "Rank_2019": 1,  "Rank_2024": 1},
+      {"State": "Selangor",        "Rank_2019": 2,  "Rank_2024": 2},
+      {"State": "Johor",           "Rank_2019": 4,  "Rank_2024": 3},
+      {"State": "Pahang",          "Rank_2019": 5,  "Rank_2024": 4},
+      {"State": "Perak",           "Rank_2019": 6,  "Rank_2024": 5},
+      {"State": "Kedah",           "Rank_2019": 3,  "Rank_2024": 6},
+      {"State": "Penang",          "Rank_2019": 7,  "Rank_2024": 7},
+      {"State": "Melaka",          "Rank_2019": 9,  "Rank_2024": 8},
+      {"State": "Negeri Sembilan", "Rank_2019": 8,  "Rank_2024": 9},
+      {"State": "Kelantan",        "Rank_2019": 10, "Rank_2024": 10},
+      {"State": "Sabah",           "Rank_2019": 11, "Rank_2024": 11},
+      {"State": "Sarawak",         "Rank_2019": 12, "Rank_2024": 12},
+      {"State": "Terengganu",      "Rank_2019": 13, "Rank_2024": 13},
+      {"State": "Perlis",          "Rank_2019": 14, "Rank_2024": 14}
+    ]
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "transform": [
+    {
+      "fold": ["Rank_2019", "Rank_2024"],
+      "as": ["Timeline", "Rank"]
+    },
+    {
+      "calculate": "datum.Timeline == 'Rank_2019' ? 'Pre-Pandemic (2019)' : 'Post-Opening (2024)'",
+      "as": "YearPeriod"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "line", "strokeWidth": 2.5},
+      "encoding": {
+        "x": {
+          "field": "YearPeriod",
+          "type": "nominal",
+          "title": null,
+          "sort": ["Pre-Pandemic (2019)", "Post-Opening (2024)"],
+          "scale": {"padding": 0.4},
+          "axis": {
+            "labelFontSize": 11,
+            "labelFontWeight": "bold",
+            "labelAngle": 0,
+            "domain": true,
+            "ticks": true
+          }
+        },
+        "y": {
+          "field": "Rank",
+          "type": "quantitative",
+          "title": "Rank Position Index",
+          "scale": {"domain": [15.2, 0.7]},
+          "axis": {
+            "tickCount": 14,
+            "values": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+            "labelFontSize": 10,
+            "titlePadding": 12
+          }
+        },
+        "color": {
+          "condition": [
+            {"test": "datum.State == 'Kedah' || datum.State == 'Perak'", "value": "#00796b"}
+          ],
+          "value": "#cfd8dc"
+        },
+        "detail": {"field": "State"},
+        "tooltip": [
+          {"field": "State",     "type": "nominal",      "title": "State/Territory"},
+          {"field": "Rank_2019", "type": "quantitative", "title": "2019 Base Rank"},
+          {"field": "Rank_2024", "type": "quantitative", "title": "2024 Reopening Rank"}
+        ]
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "dx": 8, "fontSize": 10, "fontWeight": "bold"},
+      "encoding": {
+        "x": {
+          "field": "YearPeriod",
+          "type": "nominal",
+          "sort": ["Pre-Pandemic (2019)", "Post-Opening (2024)"]
+        },
+        "y": {"field": "Rank", "type": "quantitative"},
+        "text": {"field": "State", "type": "nominal"},
+        "opacity": {
+          "condition": {"test": "datum.YearPeriod == 'Post-Opening (2024)'", "value": 1},
+          "value": 0
+        },
+        "color": {
+          "condition": [
+            {"test": "datum.State == 'Kedah' || datum.State == 'Perak'", "value": "#004d40"}
+          ],
+          "value": "#546e7a"
+        }
+      }
+    }
+  ]
+}

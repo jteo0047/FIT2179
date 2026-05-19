@@ -1,0 +1,84 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Spatial Distribution of State Arrivals",
+    "subtitle": "Interactive choropleth map tracking annual tourist arrivals across Malaysia, 2024",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069"
+  },
+  "width": 340,
+  "height": 300,
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"}
+  },
+  "data": {
+    "url": "malaysia-states.topojson",
+    "format": {
+      "type": "topojson",
+      "feature": "states"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.Name",
+      "from": {
+        "data": {
+          "url": "state_arrivals.csv"
+        },
+        "key": "State",
+        "fields": ["Arrivals_Millions"]
+      }
+    }
+  ],
+  "params": [
+    {
+      "name": "state_selection",
+      "select": {
+        "type": "point",
+        "fields": ["id"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#ffffff",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "color": {
+      "field": "Arrivals_Millions",
+      "type": "quantitative",
+      "title": "Arrivals (M)",
+      "scale": {"scheme": "teals"},
+      "legend": {
+        "orient": "bottom",
+        "direction": "horizontal",
+        "titleFontSize": 10,
+        "labelFontSize": 9
+      }
+    },
+    "opacity": {
+      "condition": {
+        "param": "state_selection",
+        "value": 1
+      },
+      "value": 0.35
+    },
+    "tooltip": [
+      {
+        "field": "properties.Name",
+        "type": "nominal",
+        "title": "State/Territory"
+      },
+      {
+        "field": "Arrivals_Millions",
+        "type": "quantitative",
+        "title": "Arrivals (Millions)",
+        "format": ",.2f"
+      }
+    ]
+  }
+}

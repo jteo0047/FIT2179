@@ -1,0 +1,78 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Where Does the Money Go?",
+    "subtitle": "Percentage composition of domestic tourism consumption across Malaysia, 2024",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069"
+  },
+  "width": 340,
+  "height": 260,
+  "data": {
+    "url": "spending_split.csv"
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"}
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "arc", 
+        "innerRadius": 65,
+        "outerRadius": 100,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "theta": {
+          "field": "Percentage", 
+          "type": "quantitative", 
+          "stack": true,
+          "sort": "descending"
+        },
+        "color": {
+          "field": "Component",
+          "type": "nominal",
+          "scale": {
+            "range": ["#3a918b", "#7b4fa8", "#5ba370", "#9b8cb7", "#2c3e50", "#7f8c8d"]
+          },
+          "legend": {
+            "orient": "right",
+            "title": "Consumption Types",
+            "labelFontSize": 10,
+            "titleFontSize": 11
+          }
+        },
+        "tooltip": [
+          {"field": "Component", "type": "nominal", "title": "Category"},
+          {"field": "Percentage", "type": "quantitative", "title": "Share (%)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 22,
+        "fontWeight": "bold",
+        "color": "#111111",
+        "text": "100%",
+        "align": "center",
+        "baseline": "middle"
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "color": "#586069",
+        "text": "Total Share",
+        "align": "center",
+        "baseline": "middle",
+        "dy": 20
+      }
+    }
+  ]
+}

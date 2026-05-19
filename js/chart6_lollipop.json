@@ -1,0 +1,123 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The State Monetization Index Profile",
+    "subtitle": "Computed average value extraction rate per individual tourist (RM / Visitor), 2024",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069",
+    "offset": 12
+  },
+  "width": 350,
+  "height": 330,
+  "data": {
+    "values": [
+      {"State": "Kuala Lumpur",     "Visitors_2024": 26.01, "Expenditure_2024": 14124},
+      {"State": "Selangor",         "Visitors_2024": 24.38, "Expenditure_2024": 11440},
+      {"State": "Johor",            "Visitors_2024": 17.14, "Expenditure_2024": 9481},
+      {"State": "Pahang",           "Visitors_2024": 14.65, "Expenditure_2024": 9526},
+      {"State": "Perak",            "Visitors_2024": 14.65, "Expenditure_2024": 10209},
+      {"State": "Kedah",            "Visitors_2024": 13.44, "Expenditure_2024": 6854},
+      {"State": "Penang",           "Visitors_2024": 13.44, "Expenditure_2024": 4766},
+      {"State": "Melaka",           "Visitors_2024": 13.12, "Expenditure_2024": 6158},
+      {"State": "Negeri Sembilan",  "Visitors_2024": 12.80, "Expenditure_2024": 5988},
+      {"State": "Kelantan",         "Visitors_2024": 9.85,  "Expenditure_2024": 5864},
+      {"State": "Sabah",            "Visitors_2024": 7.55,  "Expenditure_2024": 6081},
+      {"State": "Sarawak",          "Visitors_2024": 6.63,  "Expenditure_2024": 5701},
+      {"State": "Terengganu",       "Visitors_2024": 6.06,  "Expenditure_2024": 4918},
+      {"State": "Perlis",           "Visitors_2024": 1.92,  "Expenditure_2024": 1262}
+    ]
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "transform": [
+    {
+      "calculate": "datum.Expenditure_2024 / datum.Visitors_2024",
+      "as": "Value_Per_Visitor"
+    },
+    {
+      "calculate": "datum.Value_Per_Visitor > 700 ? 'High (> RM 700)' : datum.Value_Per_Visitor >= 500 ? 'Mid (RM 500–700)' : 'Low (< RM 500)'",
+      "as": "Yield_Tier"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "rule", "strokeWidth": 1.5},
+      "encoding": {
+        "y": {
+          "field": "State",
+          "type": "nominal",
+          "sort": {"field": "Value_Per_Visitor", "order": "descending"},
+          "axis": {
+            "domain": true,
+            "ticks": false,
+            "labelFontSize": 11,
+            "title": null,
+            "labelPadding": 8
+          }
+        },
+        "x": {
+          "field": "Value_Per_Visitor",
+          "type": "quantitative",
+          "title": "Extracted Spend Yield (RM per Traveler)",
+          "scale": {"zero": true},
+          "axis": {
+            "domain": true,
+            "ticks": true,
+            "labelFontSize": 10,
+            "titlePadding": 10,
+            "titleFontSize": 11
+          }
+        },
+        "x2": {"value": 0},
+        "color": {
+          "field": "Yield_Tier",
+          "type": "nominal",
+          "scale": {
+            "domain": ["High (> RM 700)", "Mid (RM 500–700)", "Low (< RM 500)"],
+            "range": ["#00796b", "#80cbc4", "#cfd8dc"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "mark": {"type": "circle", "size": 110, "opacity": 1},
+      "encoding": {
+        "y": {
+          "field": "State",
+          "type": "nominal",
+          "sort": {"field": "Value_Per_Visitor", "order": "descending"}
+        },
+        "x": {"field": "Value_Per_Visitor", "type": "quantitative"},
+        "color": {
+          "field": "Yield_Tier",
+          "type": "nominal",
+          "scale": {
+            "domain": ["High (> RM 700)", "Mid (RM 500–700)", "Low (< RM 500)"],
+            "range": ["#00796b", "#80cbc4", "#cfd8dc"]
+          },
+          "legend": {
+            "title": "Yield Tier",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "symbolSize": 80
+          }
+        },
+        "tooltip": [
+          {"field": "State",             "type": "nominal",      "title": "State/Territory"},
+          {"field": "Yield_Tier",        "type": "nominal",      "title": "Yield Tier"},
+          {"field": "Visitors_2024",     "type": "quantitative", "title": "Total Visitors (Millions)"},
+          {"field": "Expenditure_2024",  "type": "quantitative", "title": "Gross Revenue (RM M)"},
+          {"field": "Value_Per_Visitor", "type": "quantitative", "title": "Yield per Visitor (RM)", "format": ",.1f"}
+        ]
+      }
+    }
+  ]
+}

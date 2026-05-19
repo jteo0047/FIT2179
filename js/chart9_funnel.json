@@ -1,0 +1,80 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "The Cross-Border Entry Funnel Dynamics",
+    "subtitle": "Percentage share distribution by transport mode and checkpoint (Jan-Apr 2025)",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069",
+    "offset": 15
+  },
+  "width": 350,
+  "height": 330,
+  "padding": {"left": 20, "right": 20, "top": 10, "bottom": 10},
+  "data": {
+    "values": [
+      {"Mode": "Land", "Checkpoint": "Tambak Johor (Causeway)", "Share": 71.4},
+      {"Mode": "Land", "Checkpoint": "Gelang Patah (Second Link)", "Share": 21.3},
+      {"Mode": "Air",  "Checkpoint": "KLIA Terminal 2", "Share": 2.9},
+      {"Mode": "Air",  "Checkpoint": "KLIA Main Terminal", "Share": 2.4},
+      {"Mode": "Rail", "Checkpoint": "Woodlands Train Ckpt", "Share": 1.6},
+      {"Mode": "Sea",  "Checkpoint": "Stulang Laut Ferry", "Share": 0.4}
+    ]
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "mark": {
+    "type": "bar",
+    "stroke": "#ffffff",
+    "strokeWidth": 1
+  },
+  "encoding": {
+    "x": {
+      "field": "Mode",
+      "type": "nominal",
+      "title": "Mode of Transport",
+      "axis": {
+        "labelFontSize": 11,
+        "labelAngle": 0,
+        "domain": true,
+        "ticks": true,
+        "titlePadding": 10
+      }
+    },
+    "y": {
+      "field": "Share",
+      "type": "quantitative",
+      "title": "Share of Total Arrivals (%)",
+      "scale": {"domain": [0, 100]},
+      "axis": {
+        "domain": true,
+        "ticks": true,
+        "labelFontSize": 10,
+        "titlePadding": 12
+      }
+    },
+    "color": {
+      "field": "Checkpoint",
+      "type": "nominal",
+      "scale": {
+        "scheme": "purples"
+      },
+      "legend": {
+        "orient": "right",
+        "title": "Direct Gateway Point",
+        "titleFontSize": 11,
+        "labelFontSize": 9,
+        "rowPadding": 4
+      }
+    },
+    "tooltip": [
+      {"field": "Mode", "type": "nominal", "title": "Transit Vector"},
+      {"field": "Checkpoint", "type": "nominal", "title": "Border Point Location"},
+      {"field": "Share", "type": "quantitative", "title": "Arrival Share (%)", "format": ".1f"}
+    ]
+  }
+}

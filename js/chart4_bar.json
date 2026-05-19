@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "State Arrival Leaderboard Rankings",
+    "subtitle": "Click map shapes to isolate individual states and evaluate regional volume gaps",
+    "anchor": "start",
+    "fontSize": 14,
+    "subtitleFontSize": 11,
+    "subtitleColor": "#586069"
+  },
+  "width": 340,
+  "height": 300,
+  "data": {
+    "url": "state_arrivals.csv"
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {"stroke": "transparent"},
+    "axis": {"grid": false}
+  },
+  "params": [
+    {
+      "name": "state_selection",
+      "select": {
+        "type": "point",
+        "fields": ["State"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 4
+  },
+  "encoding": {
+    "x": {
+      "field": "Arrivals_Millions",
+      "type": "quantitative",
+      "title": "Tourist Arrivals (Millions)",
+      "scale": {"zero": true}
+    },
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {"labelFontSize": 10, "ticks": false, "domain": false}
+    },
+    "color": {
+      "field": "Arrivals_Millions",
+      "type": "quantitative",
+      "scale": {"scheme": "teals"},
+      "legend": null
+    },
+    "opacity": {
+      "condition": {"param": "state_selection", "value": 1},
+      "value": 0.35
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal", "title": "State/Territory"},
+      {"field": "Arrivals_Millions", "type": "quantitative", "title": "Arrivals (Millions)", "format": ",.2f"}
+    ]
+  }
+}
