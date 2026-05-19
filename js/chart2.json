@@ -11,7 +11,7 @@
   "width": 340,
   "height": 260,
   "data": {
-    "url": "spending_split.csv"
+    "url": "data/spending_split.csv"
   },
   "config": {
     "background": "#ffffff",
