@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Where Do Tourists Go in Malaysia? A State-by-State Analysis</title>
+  <link rel="stylesheet" href="css/style.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+
+  <div class="dashboard-container">
+    <h1>Where Do Tourists Go in Malaysia? A State-by-State Analysis of Travel Patterns and Tourism Value</h1>
+    <hr class="title-divider">
+
+    <h2 class="section-heading">Section 1: Overview — Malaysia Tourism Landscape</h2>
+    <div class="dashboard-grid">
+      <div id="vis1" class="chart-card"></div>
+      <div id="vis2" class="chart-card"></div>
+    </div>
+
+    <h2 class="section-heading" style="margin-top: 50px;">Section 2: The Geographic Explorer — Where the Crowds Go</h2>
+    <div class="dashboard-grid-full">
+      <div id="vis3" class="chart-card-full"></div>
+    </div>
+
+    <h2 class="section-heading" style="margin-top: 50px;">Section 3: Custom Analytical Engineering — Post-Pandemic Dynamics & Interdependencies</h2>
+    <div class="dashboard-grid">
+      <div id="vis4" class="chart-card"></div>
+      <div id="vis5" class="chart-card"></div>
+    </div>
+
+    <div class="dashboard-grid-full" style="margin-top: 25px;">
+      <div id="vis6" class="chart-card-full" style="min-height: 560px; padding: 35px 25px; display: flex; justify-content: center; align-items: center;"></div>
+    </div>
+
+    <h2 class="section-heading" style="margin-top: 50px;">Section 4: Tracking the International Flow & Strategic Bottlenecks</h2>
+    <div class="dashboard-grid">
+      <div id="vis7" class="chart-card"></div>
+      <div id="vis8" class="chart-card"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // --- Execution Embedding Orchestration Loops ---
+    vegaEmbed('#vis1', 'js/chart1.json', {"actions": false}).catch(console.error);
+    vegaEmbed('#vis2', 'js/chart2.json', {"actions": false}).catch(console.error);
+    vegaEmbed('#vis3', 'js/section2.json', {"actions": false}).catch(console.error);
+    
+    // Row-Distributed Section 3 Embed Pipeline Targets
+    vegaEmbed('#vis4', 'js/chart5_slope.json', {"actions": false}).catch(console.error);
+    vegaEmbed('#vis5', 'js/chart6_lollipop.json', {"actions": false}).catch(console.error);
+    vegaEmbed('#vis6', 'js/chart7_heatmap.json', {"actions": false}).catch(console.error);
+
+    // Section 4 International Flow Target Links
+    vegaEmbed('#vis7', 'js/chart8_pillars.json', {"actions": false}).catch(console.error);
+    vegaEmbed('#vis8', 'js/chart9_funnel.json', {"actions": false}).catch(console.error);
+  
+  </script>
+
+</body>
+</html>
